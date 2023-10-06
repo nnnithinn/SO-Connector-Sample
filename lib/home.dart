@@ -19,10 +19,10 @@ class _HomeState extends State<Home> {
     return Scaffold(
       drawer: NavDrawer(client: client),
       appBar: AppBar(
-        title: const Text('Side Menu Bar'),
+        title: const Text('Welcome'),
       ),
       body: const Center(
-        child: Text('Side Menu Tutorial'),
+        child: Text('SO login'),
       ),
     );
   }

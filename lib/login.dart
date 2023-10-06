@@ -134,7 +134,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void login() async {
-    Client client = Client("host", "database");
+    Client client = Client("emqim12.engravsystems.com", "emqimtest");
     String status = await client.login(loginController.value.text, passwordController.value.text);
     await Future.delayed(const Duration(seconds: 1));
     if(!context.mounted) return;
