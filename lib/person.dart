@@ -39,7 +39,7 @@ class _PersonListState extends State<PersonList> {
         future: _future,
         builder: (BuildContext context, AsyncSnapshot<Map<String, dynamic>> snapshot) {
           if(snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator();
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Text("Error: ${snapshot.error}");
           } else {
