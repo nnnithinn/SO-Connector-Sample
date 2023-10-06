@@ -12,24 +12,22 @@ class PersonList extends StatefulWidget {
 
 class _PersonListState extends State<PersonList> {
   Client client;
-  _PersonListState({required this.client});
-
   @override
   Widget build(BuildContext context) {
 
     Future<Map<String, dynamic>> _future = Future.delayed(
       const Duration(seconds: 2),
         () => client.command("list", {
-          "className": "core.SystemUser",
+          "className": "core.Person",
           "attributes": [
-            "Person.FirstName",
-            "Person.MiddleName",
-            "Person.LastName",
-            "Person.DateOfBirth",
-            "Person.GenderValue",
-            "Person.MaritalStatusValue",
+            "FirstName",
+            "MiddleName",
+            "LastName",
+            "DateOfBirth",
+            "GenderValue",
+            "MaritalStatusValue",
           ],
-          "where": "FirstName LIKE 'z%'",
+          "where": "FirstName LIKE 'N%'",
           "order": "FirstName"
         }
       )
@@ -40,23 +38,40 @@ class _PersonListState extends State<PersonList> {
       body: FutureBuilder<Map<String, dynamic>> (
         future: _future,
         builder: (BuildContext context, AsyncSnapshot<Map<String, dynamic>> snapshot) {
-          var data = snapshot.data;
-          if(data == null) {
-            return const Placeholder();
+          if(snapshot.connectionState == ConnectionState.waiting) {
+            return const CircularProgressIndicator();
+          } else if (snapshot.hasError) {
+            return Text("Error: ${snapshot.error}");
+          } else {
+            final data = snapshot.data as Map<String, dynamic>;
+            // Extract the list from the map using the appropriate key
+            final dataList = data['data'] as List<dynamic>;
+            
+            // Process the data here and create a list of Card widgets
+            List<Widget> cardList = dataList.map((dataItem) {
+              String firstName = dataItem['FirstName'] ?? '';
+              String lastName = dataItem['LastName'] ?? '';
+              String dob = dataItem['DateOfBirth'] ?? '';
+              String gender = dataItem['GenderValue'] ?? '';
+
+              return Card(
+                child: ListTile(
+                  title: Text('$firstName $lastName'),
+                  subtitle: Text('DOB: $dob\nGender: $gender'),
+                ),
+              );
+            }).toList();
+
+            // Return a ListView to display the Card widgets
+            return ListView(
+              children: cardList,
+            );
           }
-          print(data);
-          data.forEach((key, value) {
-              print("$key");
-              print("$value");
-            }
-          );
-          return ListTile(
-            title: Text('Name: ${data['FirstName']} ${data['LastName']}'),
-            subtitle: Text('Date of Birth: ${data['DateOfBirth']}'),
-          );
         }
       ),
     );
   }
+
+  _PersonListState({required this.client});
 
 }
