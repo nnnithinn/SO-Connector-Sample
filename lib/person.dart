@@ -16,7 +16,7 @@ class _PersonListState extends State<PersonList> {
   Widget build(BuildContext context) {
 
     Future<Map<String, dynamic>> _future = Future.delayed(
-      const Duration(seconds: 2),
+      const Duration(seconds: 1),
         () => client.command("list", {
           "className": "core.Person",
           "attributes": [
@@ -27,7 +27,6 @@ class _PersonListState extends State<PersonList> {
             "GenderValue",
             "MaritalStatusValue",
           ],
-          "where": "FirstName LIKE 'N%'",
           "order": "FirstName"
         }
       )
