@@ -1,16 +1,10 @@
 # sologin
 
-A new Flutter project.
+Flutter project that uses SO Dart Package
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This is a sample project to demonstrate how the SO Dart package works
+It demonstrates how to use the [Client] (https://pub.dev/documentation/so/latest/so/Client-class.html) class provided is the SO Dart Package to login and run command (make requests to the backend service)
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Please visit [SO Dart Package] (https://pub.dev/packages/so) for more information and examples
