@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:so/so.dart';
-import 'package:sologin/core/NavDrawer.dart';
+import 'package:sologin/NavDrawer.dart';
 
 class Home extends StatefulWidget {
   Client client;
