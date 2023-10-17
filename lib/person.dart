@@ -18,16 +18,17 @@ class _PersonListState extends State<PersonList> {
     Future<Map<String, dynamic>> _future = Future.delayed(
       const Duration(seconds: 1),
         () => client.command("list", {
-          "className": "core.Person",
+          "className": "com.engravsystems.emqim.hr.Staff",
           "attributes": [
-            "FirstName",
-            "MiddleName",
-            "LastName",
-            "DateOfBirth",
-            "GenderValue",
-            "MaritalStatusValue",
+            "Person.FirstName",
+            "Person.MiddleName",
+            "Person.LastName",
+            "Person.DateOfBirth",
+            "Person.GenderValue",
+            "Person.MaritalStatusValue",
           ],
-          "order": "FirstName"
+          "order": "Person.FirstName",
+          "any": true,
         }
       )
     );
@@ -48,10 +49,10 @@ class _PersonListState extends State<PersonList> {
             
             // Process the data here and create a list of Card widgets
             List<Widget> cardList = dataList.map((dataItem) {
-              String firstName = dataItem['FirstName'] ?? '';
-              String lastName = dataItem['LastName'] ?? '';
-              String dob = dataItem['DateOfBirth'] ?? '';
-              String gender = dataItem['GenderValue'] ?? '';
+              String firstName = dataItem['Person.FirstName'] ?? '';
+              String lastName = dataItem['Person.LastName'] ?? '';
+              String dob = dataItem['Person.DateOfBirth'] ?? '';
+              String gender = dataItem['Person.GenderValue'] ?? '';
 
               return Card(
                 child: ListTile(
