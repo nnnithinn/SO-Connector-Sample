@@ -7,6 +7,7 @@ class PersonList extends StatefulWidget {
   const PersonList({super.key, required this.client});
 
   @override
+  // ignore: no_logic_in_create_state
   State<PersonList> createState() => _PersonListState(client: client);
 }
 
@@ -15,7 +16,7 @@ class _PersonListState extends State<PersonList> {
   @override
   Widget build(BuildContext context) {
 
-    Future<Map<String, dynamic>> _future = Future.delayed(
+    Future<Map<String, dynamic>> future = Future.delayed(
       const Duration(seconds: 1),
         () => client.command("list", {
           "className": "com.engravsystems.emqim.hr.Staff",
@@ -36,7 +37,7 @@ class _PersonListState extends State<PersonList> {
     return Scaffold(
       appBar: AppBar(title: const Text('Person List'),),
       body: FutureBuilder<Map<String, dynamic>> (
-        future: _future,
+        future: future,
         builder: (BuildContext context, AsyncSnapshot<Map<String, dynamic>> snapshot) {
           if(snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());

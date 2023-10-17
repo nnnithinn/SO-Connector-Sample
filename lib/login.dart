@@ -113,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
     return TextField(
       controller: controller,
       decoration: InputDecoration(
-        icon: isPassword ? Icon(Icons.remove_red_eye) : Icon(Icons.done),
+        icon: isPassword ? const Icon(Icons.remove_red_eye) : const Icon(Icons.done),
       ),
       obscureText: isPassword,
     );

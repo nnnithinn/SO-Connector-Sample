@@ -1,5 +1,3 @@
-import 'dart:convert';
-import 'dart:ffi';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -20,7 +18,7 @@ class _PersonListState extends State<PersonListWithPhotoList> {
 
   @override
   Widget build(BuildContext context) {
-    Future<Map<String, dynamic>> _future = Future.delayed(
+    Future<Map<String, dynamic>> future = Future.delayed(
         const Duration(seconds: 1), () => client.command("persons", {}));
 
     return Scaffold(
@@ -28,7 +26,7 @@ class _PersonListState extends State<PersonListWithPhotoList> {
         title: const Text('Person List'),
       ),
       body: FutureBuilder<Map<String, dynamic>>(
-          future: _future,
+          future: future,
           builder: (BuildContext context,
               AsyncSnapshot<Map<String, dynamic>> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
@@ -50,7 +48,7 @@ class _PersonListState extends State<PersonListWithPhotoList> {
 
                 Widget trailingWidget;
 
-                if (photoId != null && photoId.isNotEmpty) {
+                if (photoId.isNotEmpty) {
                   trailingWidget = FutureBuilder<Data>(
                     future: client.file(photoId),
                     builder:
@@ -61,9 +59,11 @@ class _PersonListState extends State<PersonListWithPhotoList> {
                         return Text("Error: ${snapshot.error}");
                       } else if (snapshot.hasData) {
                         final Uint8List imageBytes = snapshot.data!.data;
-                        print(snapshot.data!.data);
-                        print(snapshot.data!.contentType);
-                        return Image.memory(imageBytes);
+                        return Image.memory(
+                          imageBytes,
+                          height: MediaQuery.of(context).size.width * (1 / 4),
+                          width: MediaQuery.of(context).size.width
+                        );
                       } else {
                         return const Text("No Image available");
                       }
@@ -73,13 +73,24 @@ class _PersonListState extends State<PersonListWithPhotoList> {
                   trailingWidget = const Text("No Image Available");
                 }
                 return Card(
-                  child: Center(
-                    child: ListTile(
-                      leading: SizedBox(width: 80, child: trailingWidget),
-                      title: Text('$firstName $lastName'),
-                      subtitle: Text(
-                          'DOB: $dob\nGender: $gender\n PhotoId: $photoId'),
-                    ),
+                  color: Colors.yellow[50],
+                  elevation: 10.0,
+                  margin: const EdgeInsets.all(2.0),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                  child: Column(
+                    children: [
+                      Padding(
+                          padding: const EdgeInsets.all(2.0),
+                          child: trailingWidget,
+                      ),
+                      Text(
+                        '$firstName $lastName \nDOB : $dob \nGender: $gender',
+                        style: const TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
                   ),
                 );
               }).toList();

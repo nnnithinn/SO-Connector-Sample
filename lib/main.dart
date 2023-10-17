@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:so/so.dart';
 import 'package:sologin/login.dart';
 
 void main() {
