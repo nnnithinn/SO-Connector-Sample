@@ -46,10 +46,10 @@ class _PersonListState extends State<PersonListWithPhotoList> {
                 String gender = dataItem['GenderValue'] ?? '';
                 String photoId = dataItem['PhotoId'] ?? '';
 
-                Widget trailingWidget;
+                Widget leadingWidget;
 
                 if (photoId.isNotEmpty) {
-                  trailingWidget = FutureBuilder<Data>(
+                  leadingWidget = FutureBuilder<Data>(
                     future: client.file(photoId),
                     builder:
                         (BuildContext context, AsyncSnapshot<Data> snapshot) {
@@ -70,7 +70,7 @@ class _PersonListState extends State<PersonListWithPhotoList> {
                     },
                   );
                 } else {
-                  trailingWidget = const Text("No Image Available");
+                  leadingWidget = const Text("No Image Available");
                 }
                 return Card(
                   color: Colors.yellow[50],
@@ -81,7 +81,7 @@ class _PersonListState extends State<PersonListWithPhotoList> {
                     children: [
                       Padding(
                           padding: const EdgeInsets.all(2.0),
-                          child: trailingWidget,
+                          child: leadingWidget,
                       ),
                       Text(
                         '$firstName $lastName \nDOB : $dob \nGender: $gender',
