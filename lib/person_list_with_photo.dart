@@ -77,7 +77,7 @@ class _PersonListState extends State<PersonListWithPhotoList> {
                 return SizedBox(
                   height: 100,
                   child: Card(
-                    color: Colors.yellow[50],
+                    color: Colors.blueGrey,
                     elevation: 10.0,
                     margin: const EdgeInsets.all(2.0),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -87,9 +87,13 @@ class _PersonListState extends State<PersonListWithPhotoList> {
                         '$firstName $lastName',
                         style: const TextStyle(
                           fontSize: 20,
+                          color: Colors.white,
                           fontWeight: FontWeight.w400,
                         ),),
-                      subtitle: Text('Gender: $gender \n DOB: $dob'),
+                      subtitle: Text('Gender: $gender \n DOB: $dob',
+                      style: TextStyle(
+                        color: Colors.white
+                      ),),
                     ),
                   ),
                 );

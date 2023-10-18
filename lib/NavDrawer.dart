@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:so/so.dart';
 import 'package:sologin/login.dart';
-import 'package:sologin/person.dart';
 import 'package:sologin/person_list_with_photo.dart';
 
 class NavDrawer extends StatelessWidget {
@@ -36,16 +35,9 @@ class NavDrawer extends StatelessWidget {
     );
 
     widgets.add(header);
-    var personListTile = ListTile(
-      title: const Text("Person List"),
-      leading: const Icon(Icons.group),
-      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => PersonList(client: client))),
-    );
-
-    widgets.add(personListTile);
 
     var personWithPhotoTile = ListTile(
-      title: const Text("Person With Photo"),
+      title: const Text("Person"),
       leading: const Icon(Icons.group),
       onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => PersonListWithPhotoList(client: client))),
     );
