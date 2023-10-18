@@ -59,10 +59,9 @@ class _PersonListState extends State<PersonListWithPhotoList> {
                         return Text("Error: ${snapshot.error}");
                       } else if (snapshot.hasData) {
                         final Uint8List imageBytes = snapshot.data!.data;
-                        return Image.memory(
-                          imageBytes,
-                          height: MediaQuery.of(context).size.width * (1 / 4),
-                          width: MediaQuery.of(context).size.width
+                        return CircleAvatar(
+                          radius: 25,
+                          backgroundImage: Image.memory(imageBytes).image,
                         );
                       } else {
                         return const Text("No Image available");
@@ -70,27 +69,28 @@ class _PersonListState extends State<PersonListWithPhotoList> {
                     },
                   );
                 } else {
-                  leadingWidget = const Text("No Image Available");
+                  leadingWidget = const CircleAvatar(
+                    radius: 25,
+                    backgroundImage: AssetImage("assets/images/sample-person.jpg"),
+                  );
                 }
-                return Card(
-                  color: Colors.yellow[50],
-                  elevation: 10.0,
-                  margin: const EdgeInsets.all(2.0),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-                  child: Column(
-                    children: [
-                      Padding(
-                          padding: const EdgeInsets.all(2.0),
-                          child: leadingWidget,
-                      ),
-                      Text(
-                        '$firstName $lastName \nDOB : $dob \nGender: $gender',
+                return SizedBox(
+                  height: 100,
+                  child: Card(
+                    color: Colors.yellow[50],
+                    elevation: 10.0,
+                    margin: const EdgeInsets.all(2.0),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                    child: ListTile(
+                      leading: leadingWidget,
+                      title: Text(
+                        '$firstName $lastName',
                         style: const TextStyle(
-                          fontSize: 20.0,
+                          fontSize: 20,
                           fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ],
+                        ),),
+                      subtitle: Text('Gender: $gender \n DOB: $dob'),
+                    ),
                   ),
                 );
               }).toList();
