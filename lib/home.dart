@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:so/so.dart';
-import 'package:sologin/NavDrawer.dart';
+import 'package:sologin/nav_drawer.dart';
 
 class Home extends StatefulWidget {
   Client client;
