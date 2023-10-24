@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:so/so.dart';
 import 'package:sologin/login.dart';
+import 'package:sologin/pdf_example.dart';
 import 'package:sologin/person_list.dart';
 
 class NavDrawer extends StatelessWidget {
@@ -44,6 +45,15 @@ class NavDrawer extends StatelessWidget {
     );
 
     widgets.add(personWithPhotoTile);
+
+    var report = ListTile(
+      title: const Text("Report"),
+      leading: const Icon(Icons.group),
+      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) =>
+          PDFExample(client: client))),
+    );
+
+    widgets.add(report);
 
     var logoutTile = ListTile(
       title: const Text("Logout"),
