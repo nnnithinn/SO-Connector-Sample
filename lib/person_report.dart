@@ -1,22 +1,30 @@
-
-import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:so/so.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
-class PDFExample extends StatefulWidget {
+class PDFReport extends StatefulWidget {
   final Client client;
-  const PDFExample({super.key, required this.client});
+  final String filterString;
+  final String reportClassName;
+  const PDFReport(this.filterString,
+      {super.key, required this.client, required this.reportClassName});
 
   @override
-  State<PDFExample> createState() => _PDFExampleState(client);
+  State<PDFReport> createState() =>
+      _PDFReportState(
+          filterString,
+          client: client,
+          reportClassName: reportClassName
+      );
 }
 
-class _PDFExampleState extends State<PDFExample> {
+class _PDFReportState extends State<PDFReport> {
   final Client client;
-  _PDFExampleState(this.client);
+  final String filterCondition;
+  final String reportClassName;
+  _PDFReportState(this.filterCondition, {required this.client, required this.reportClassName});
   
   @override
   Widget build(BuildContext context) {
@@ -26,8 +34,8 @@ class _PDFExampleState extends State<PDFExample> {
         ),
         body: FutureBuilder<(Uint8List?, String?, String?)>(
             future:
-            client.report('com.engravsystems.emqim.test.logic.TestPersonReport', {
-              "filter" : "lower(FirstName) LIKE 'a%'"
+            client.report('', {
+              "filter" : filterCondition
             }),
             builder: (context, snapshot) {
               if(snapshot.connectionState == ConnectionState.waiting) {

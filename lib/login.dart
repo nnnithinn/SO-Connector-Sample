@@ -40,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
               child: CircleAvatar(
                   radius: 70,
                   backgroundImage:
-                      AssetImage("assets/images/sample-person.jpg"))),
+                  AssetImage("assets/images/sample-person.jpg"))),
           const SizedBox(height: 50),
           Card(
             shape: const RoundedRectangleBorder(
@@ -116,13 +116,13 @@ class _LoginPageState extends State<LoginPage> {
     } else {
       var a = AlertDialog(
           content: Column(
-        children: [
-          Text("Unable to login $status"),
-          ElevatedButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: const Text('Login'))
-        ],
-      ));
+            children: [
+              Text("Unable to login $status"),
+              ElevatedButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: const Text('Login'))
+            ],
+          ));
       Navigator.push(context, MaterialPageRoute(builder: (context) => a));
     }
   }

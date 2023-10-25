@@ -14,6 +14,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       drawer: NavDrawer(client: widget.client),
       appBar: AppBar(
         title: const Text('Welcome'),
